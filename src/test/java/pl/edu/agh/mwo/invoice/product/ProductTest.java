@@ -28,13 +28,13 @@ public class ProductTest {
 		Assert.assertThat(new BigDecimal("100"), Matchers.comparesEqualTo(product.getPrice()));
 		Assert.assertThat(new BigDecimal("0.08"), Matchers.comparesEqualTo(product.getTaxPercent()));
 	}
-//test
+
 	@Test
 	public void testPriceWithTax() {
 		Product product = new DairyProduct("Oscypek", new BigDecimal("100.0"));
 		Assert.assertThat(new BigDecimal("108"), Matchers.comparesEqualTo(product.getPriceWithTax()));
 	}
-//
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testProductWithNullName() {
 		new OtherProduct(null, new BigDecimal("100.0"));
