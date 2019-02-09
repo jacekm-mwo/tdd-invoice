@@ -10,9 +10,12 @@ public abstract class Product {
 	private final BigDecimal taxPercent;
 
 	protected Product(String name, BigDecimal price, BigDecimal tax) {
+	
 		this.name = name;
 		this.price = price;
 		this.taxPercent = tax;
+
+    
 	}
 
 	public String getName() {
