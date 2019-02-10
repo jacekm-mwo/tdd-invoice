@@ -142,4 +142,38 @@ public class InvoiceTest {
 		}
 	}
 	
+	@Test
+	public void testPrintedInvoiceHasNumber() {
+		String pritnedInvoice = invoice.getAsText();
+		String number = invoice.getNumber().toString();
+		Assert.assertThat(pritnedInvoice,  Matchers.containsString("nr " + number));
+	}
+	
+	@Test
+	public void testPrintedInvoiceHasProductsNamePriceQuantity() {
+		
+		invoice.addProduct(new TaxFreeProduct("Bulka", new BigDecimal("2")), 2);
+		
+		
+		String pritnedInvoice = invoice.getAsText();
+		
+		Assert.assertThat(pritnedInvoice,  Matchers.containsString("Bulka 2 2"));
+	}
+	
+	@Test
+	public void testEachproductinNewLine(){
+		
+		invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")));
+		invoice.addProduct(new TaxFreeProduct("bulka", new BigDecimal("5")));
+		Assert.assertThat(invoice.getAsText(), Matchers.containsString("\n"));
+	}
+	
+	
+	@Test
+	public void testAddingTheSameProductTwice() {
+		invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")));
+		invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")));
+        
+		Assert.assertThat(invoice.getAsText(), Matchers.containsString("Chleb 2 5"));
+	}
 }

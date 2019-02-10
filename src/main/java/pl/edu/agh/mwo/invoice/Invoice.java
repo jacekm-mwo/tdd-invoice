@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,4 +55,29 @@ public class Invoice {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	public String getAsText() {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("nr " + this.getNumber());
+		
+		//DecimalFormat df = new DecimalFormat("0.00");
+		
+		for (Product product : products.keySet()) {
+			BigDecimal quantity = new BigDecimal(products.get(product));
+			sb.append("\n");
+			sb.append(product.getName());
+			sb.append(" ");
+			sb.append(quantity);
+			sb.append(" ");
+			sb.append(product.getPrice());
+
+		}
+		sb.append("\n liczba pozycji:" + products.size());
+		return sb.toString();
+		
+	}
+	
+
 }
