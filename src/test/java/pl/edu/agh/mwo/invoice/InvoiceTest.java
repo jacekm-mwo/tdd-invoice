@@ -133,4 +133,13 @@ public class InvoiceTest {
 		Assert.assertEquals(number, number2);
 	}
 	
+	@Test
+	public void secondInvoicehasBiggernumber(){
+		for (int i = 0; i < 20; i++) {
+		Integer number = invoice.getNumber();
+		Integer number2 = new Invoice().getNumber();
+		Assert.assertThat(number,Matchers.lessThan(number2));
+		}
+	}
+	
 }
