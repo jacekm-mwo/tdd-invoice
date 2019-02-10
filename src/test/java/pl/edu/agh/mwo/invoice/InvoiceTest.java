@@ -15,10 +15,12 @@ import pl.edu.agh.mwo.invoice.product.TaxFreeProduct;
 
 public class InvoiceTest {
 	private Invoice invoice;
+	private Invoice invoice2;
 
 	@Before
 	public void createEmptyInvoiceForTheTest() {
 		invoice = new Invoice();
+		invoice2= new Invoice();
 	}
 
 	@Test
@@ -104,4 +106,31 @@ public class InvoiceTest {
 	public void testInvoiceWithNegativeQuantity() {
 		invoice.addProduct(new DairyProduct("Zsiadle mleko", new BigDecimal("5.55")), -1);
 	}
+	
+	@Test
+	public void testInvoiceHasNumber(){
+		Integer number = invoice.getNumber();
+		Assert.assertNotNull(number);
+		
+	}
+	@Test
+	public void testInvoiceNumberisGreaterThanZero(){
+		Integer number = invoice.getNumber();
+		Assert.assertThat(number, Matchers.greaterThan(0));
+	}
+
+	@Test
+	public void testInvoicesHaveDifferentNUmber(){
+		Integer number = invoice.getNumber();
+		Integer number2 = invoice2.getNumber();
+		Assert.assertNotEquals(number, number2);
+	}
+	
+	@Test
+	public void testInvoicesHasSameNumber(){
+		Integer number = invoice.getNumber();
+		Integer number2 = invoice.getNumber();
+		Assert.assertEquals(number, number2);
+	}
+	
 }
